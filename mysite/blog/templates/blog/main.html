@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <center>
+    <head>
+        <title>COMPANIES BLOG</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    </head>
+    <div style="background-color:black;color:white;padding:15px;">
+        <h1><a>COMPANIES BLOG'S</a></h1>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    </div>
+    </center>
+    <center>
+        <div>
+            <h1><a href="{% url 'advertisement' %}">ADVERTISEMENT'S</a></h1>
+        </div>
+        <div>
+            <h1><a href="{% url 'companies' %}">COMPANIES</a></h1>
+        </div>
+        <div>
+            <h1><a href="{% url 'comments' %}">COMMENT'S</a></h1>
+        </div>
+    </center>
+
+{% endblock %}
+
+
+

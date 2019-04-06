@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+        <h3><a href="{% url 'adver_edit' %}" class="top-menu"><span class="glyphicon glyphicon-plus">add new</span></a></h3>
+        <center>
+        <div style="background-color:black;color:white;padding:10px;">
+            <h1><a href="{% url 'advertisement' %}">ADVERTISEMENT'S</a></h1>
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        </div>
+        {% for ad in ads %}
+        <div>
+           <h1><a href="{% url 'ad_details' pk=ad.pk %}">{{ ad }}</a></h1>
+        </div>
+        {% endfor %}
+        </center>
+{% endblock %}

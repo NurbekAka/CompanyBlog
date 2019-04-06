@@ -1,0 +1,19 @@
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+        <center>
+        <div style="background-color:black;color:white;padding:10px;">
+            <h1><a href="{% url 'companies_details' pk=comments.company.pk %}">{{ comments.company }}</a></h1>
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        </div>
+            <h2>Advertisement: {{ comments.post }}</h2>
+            <h2>Comment: {{ comments.comment }}</h2>
+            <h2>Comment by: {{ comments.company }}</h2>
+            <h2>Commented date: {{ comments.created_date }}</h2>
+        </center>
+        <div>
+                <h3><a href="{% url 'add_comment' pk=comment.pk %}" class="top-menu"><span class="glyphicon glyphicon-plus">edit</span></a></h3>
+        </div>
+{% endblock %}

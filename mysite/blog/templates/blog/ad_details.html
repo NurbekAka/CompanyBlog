@@ -1,0 +1,17 @@
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+        <center>
+        <div style="background-color:black;color:white;padding:10px;">
+            <h1><a href="{% url 'ad_details' pk=ads.pk %}">{{ ads.company }}</a></h1>
+        </div>
+            <h2>Title: {{ ads.title }}</h2>
+            <h2>Text: {{ ads.advertisement }}</h2>
+            <h2>Advertisement picture's: {{ ads.photo }}</h2>
+            <h2>Created date: {{ ads.created_date }}</h2>
+        </center>
+        <div>
+                <h3><a href="{% url 'adver_edit' pk=ads.pk %}" class="top-menu"><span class="glyphicon glyphicon-plus">edit</span></a></h3>
+        </div>
+{% endblock %}

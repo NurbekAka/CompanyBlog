@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+        <h3><a href="{% url 'company_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus">add new</span></a></h3>
+        <center>
+        <div style="background-color:black;color:white;padding:20px;">
+            <h1><a href="{% url 'companies' %}">COMPANIES</a></h1>
+                <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+                <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        </div>
+        {% for company in companies %}
+        <div>
+            <h1><a href="{% url 'companies_details' pk=company.pk %}">{{ company }}</a></h1>
+        </div>
+        {% endfor %}
+        </center>
+{% endblock %}

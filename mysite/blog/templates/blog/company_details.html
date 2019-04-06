@@ -1,0 +1,21 @@
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+        <center>
+        <div style="background-color:black;color:white;padding:10px;">
+            <h1><a href="{% url 'companies_details' pk=companies.pk %}">{{ companies.company }}</a></h1>
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        </div>
+            <h2>Company adress: {{ companies.adress }}</h2>
+            <h2>Phone number: {{ companies.phone_number }}</h2>
+            <h2>Logo: </h2>
+            <img src="{{ companies.logo }}" alt="Trulli" width="500" height="333">
+            <h2>About company: {{ companies.info }}</h2>
+            <h2>Owner: {{ companies.owner }}</h2>
+        </center>
+        <div>
+            <a class="btn btn-default" href="{% url 'company_edit' pk=companies.pk %}">edit<span class="glyphicon glyphicon-pencil"></span></a>
+        </div>
+{% endblock %}

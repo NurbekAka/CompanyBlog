@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+        <center>
+            <h3><a href="{% url 'comment_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus">add new</span></a></h3>
+        <div style="background-color:black;color:white;padding:20px;">
+            <h1><a href="{% url 'comments' %}">COMMENTS</a></h1>
+                <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+                <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        </div>
+        </center>
+        {% for comment in comments %}
+        <center>
+        <div>
+            <h1><a href="{% url 'comment_details' pk=comment.pk %}">{{ comment }}</a></h1>
+        </div>
+        </center>
+        {% endfor %}
+{% endblock %}
