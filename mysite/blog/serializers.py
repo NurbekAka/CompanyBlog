@@ -1,39 +1,83 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Company, Advertisement, Comment
+from .models import Company, Advertisement, Comment, CompanyFavorite, AdFavorite
 
+
+class CompanyFavoriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompanyFavorite
+        fields = ('company',)
+
+    def create(self, validated_data):
+        user = self.context.get('user')
+        fav_company = CompanyFavorite.objects.create(user=user, **validated_data)
+        fav_company.save()
+        return fav_company
 
 class CompanyFormSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Company
         fields = ('owner', 'company', 'address', 'phone_number', 'info', 'logo', 'id')
+class CompanyDetailSerializer(serializers.ModelSerializer):
+    is_favorite = serializers.SerializerMethodField()
 
+    class Meta:
+        model = Company
+        fields = ('company', 'address', 'logo', 'info', 'owner', 'id', 'is_favorite')
 
+    def get_is_favorite(self, obj):
+        user = self.context.get('user')
+        favorite = CompanyFavorite.objects.filter(user=user, company=obj)
+        if favorite:
+            return True
+        else:
+            return False
 class CompanyEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = ('address', 'logo', 'phone_number', 'info')
-
-
 class CompanyCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = ('company', 'address', 'logo', 'phone_number', 'info')
+        fields = ('company', 'address', 'logo', 'phone_number', 'info', 'id')
 
-    def create(self, validate_data):
+    def create(self, validated_data):
         owner = self.context.get('owner')
-        company = Company.objects.create(owner=owner, **validate_data)
+        company = Company.objects.create(owner=owner, **validated_data)
         company.save()
         return company
+class AdFavoriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdFavorite
+        fields = ('title',)
 
-
+        def create(self, validated_data):
+            user = self.context.get('user')
+            fav_advertisement = AdFavorite.objects.filter(user=user, **validated_data)
+            fav_advertisement.save()
+            return fav_advertisement
 class AdFormSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Advertisement
         fields = ('id', 'title', 'advertisement', 'picture', 'company')
         read_only_fields = ('company',)
+
+class AdDetailSerializer(serializers.ModelSerializer):
+    is_favorite = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Advertisement
+        fields = ('company', 'advertisement', 'title', 'text', 'picture', 'id', 'is_favorite')
+
+    def get_is_favorite(self, obj):
+        user = self.context.get('user')
+        favorite = AdFavorite.objects.filter(user=user, title=obj)
+        if favorite:
+            return True
+        else:
+            return False
 
 
 class AdEditSerializer(serializers.ModelSerializer):
@@ -46,6 +90,9 @@ class AdCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Advertisement
         fields = ('company', 'title', 'advertisement', 'picture')
+
+
+
 
 
 class CommentFormSerializer(serializers.ModelSerializer):
@@ -66,12 +113,8 @@ class CommentEditSerializer(serializers.ModelSerializer):
 class CommentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ('company', 'post', 'comment', 'comment_photo',)
+        fields = ('company', 'post', 'comment', 'comment_photo')
         read_only_fields = ('company', 'post')
-
-
-
-
 
 
 class SignUpFormSerializer(serializers.ModelSerializer):

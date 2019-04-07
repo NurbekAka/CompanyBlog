@@ -8,7 +8,7 @@ class CompanyForm(forms.ModelForm):
 
     class Meta:
         model = Company
-        fields = ('company', 'address', 'phone_number', 'info')
+        fields = ('company', 'address', 'phone_number', 'info', 'logo', 'owner')
 
 
 class AdForm(forms.ModelForm):

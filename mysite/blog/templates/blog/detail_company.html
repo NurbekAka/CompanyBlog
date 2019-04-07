@@ -1,0 +1,12 @@
+
+{{ request.user }}
+<p>{{ object.name }}</p>
+<p>{{ object.address }}</p>
+<p>{{ object.contacts }}</p>
+<p>{{ object.logo }}</p>
+<p>{{ object.info }}</p>
+<p>{{ company.owner }}</p>
+{% if request.user == company.owner %}
+<a href="{% url 'company_edit' pk=object.pk %}">edit</a>
+{% endif %}
+

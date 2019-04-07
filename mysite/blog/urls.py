@@ -2,7 +2,8 @@ from django.urls import path, include
 from . import views
 from rest_framework.routers import DefaultRouter
 from .views import AdvertisementView, CompanyView, CompanyCreate, CommentListView, CompanyEditView, \
-    AdvertisementCreateView, AdEditView, CommentCreateView, CommentEditView
+    AdvertisementCreateView, AdEditView, CommentCreateView, CommentEditView, CompanyFavoriteView, \
+    CompanyDetail, AdFavoriteView
 
 
 router = DefaultRouter()
@@ -13,10 +14,10 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
 
     path('company/list/', CompanyView.as_view({'get': 'list'}), name='company_list_api'),
+    path('company/<int:pk>/', CompanyDetail.as_view()),
     path('company/create/', CompanyCreate.as_view()),
-    path('company/<int:pk>/', CompanyView.as_view({'get':'retrieve', 'delete':'destroy'}),
-         name='company_api'),
     path('company/edit/<int:pk>/', CompanyEditView.as_view()),
+    path('company/favorite/', CompanyFavoriteView.as_view()),
 
 
     path('advertisement/list/', AdvertisementView.as_view({'get': 'list'}), name='advertisement_list_api'),
@@ -24,6 +25,7 @@ urlpatterns = [
     path('advertisement/<int:pk>/', AdvertisementView.as_view({'get':'retrieve', 'delete': 'destroy'}),
          name='advertisement_api'),
     path('advertisement/edit/<int:pk>/', AdEditView.as_view()),
+    path('advertisement/favorite/', AdFavoriteView.as_view()),
 
 
 
